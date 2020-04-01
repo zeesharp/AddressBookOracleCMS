@@ -1,0 +1,56 @@
+﻿@model AddressBook.Models.AddressBookModel
+@{
+    ViewBag.Title = "Address Book";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<h2>@ViewBag.Title.</h2>
+@{
+    var id = @Html.Raw(Model.ID);
+}
+
+@using (Html.BeginForm("AddEditAddressBook", "AddressBook", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    if (Model.ID.HasValue)
+    {
+        <h4>Edit address : (@Model.Name)</h4>
+    }
+    else
+    {
+        <h4>Add new address</h4>
+    }
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.ID)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.MobileNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<input type="submit" class="btn btn-primary" value="Submit" />*@
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-edit"></span> Submit
+            </button>
+            <button type="button" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("ManageAddressBook", "AddressBook") + "'");">
+                <span class="glyphicon glyphicon-backward"></span> Cancel
+            </button>
+
+          
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,55 @@
+﻿@model AddressBook.Models.AddressBookModel
+@{
+    ViewBag.Title = "Schedule Call";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<h2>@ViewBag.Title.</h2>
+@{
+    var id = @Html.Raw(Model.ID);
+}
+
+@using (Html.BeginForm("ScheduleCall", "AddressBook", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.ID)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.HiddenFor(m => m.Name)
+            @Html.DisplayFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.MobileNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.HiddenFor(m => m.MobileNumber)
+            @Html.DisplayFor(m => m.MobileNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Message" class="col-md-2 control-label">Type Message</label>
+        <div class="col-md-10">
+            @Html.TextArea("MessageDescription", null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-phone"></span> Make Call
+            </button>
+            <button type="button" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("ManageAddressBook", "AddressBook") + "'");">
+                <span class="glyphicon glyphicon-backward"></span> Cancel
+            </button>
+
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
