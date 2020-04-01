@@ -79,7 +79,6 @@ C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Microsoft.Owin.Se
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\obj\Debug\AddressBook.dll
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\obj\Debug\AddressBook.pdb
-C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\obj\Debug\AddressBook.csprojResolveAssemblyReference.cache
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Microsoft.IdentityModel.Logging.dll
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Microsoft.IdentityModel.Tokens.dll
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\System.IdentityModel.Tokens.Jwt.dll
