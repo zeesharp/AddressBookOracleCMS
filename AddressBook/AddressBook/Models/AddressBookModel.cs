@@ -21,5 +21,6 @@ namespace AddressBook.Models
         [DataType(DataType.PhoneNumber, ErrorMessage = "Provided phone number not valid")]
 
         public string MobileNumber { get; set; }
+        public string Message { get; set; }
     }
 }

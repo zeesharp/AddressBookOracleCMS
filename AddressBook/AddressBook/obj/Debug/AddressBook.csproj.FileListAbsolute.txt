@@ -88,3 +88,4 @@ C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Twilio.dll
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Microsoft.IdentityModel.Tokens.xml
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\bin\Twilio.xml
+C:\zeeProjects\Task\Task-OracleCms\AddressBook\AddressBook\obj\Debug\AddressBook.csprojResolveAssemblyReference.cache

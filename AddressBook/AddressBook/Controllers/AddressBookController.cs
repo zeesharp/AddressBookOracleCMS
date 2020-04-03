@@ -11,6 +11,7 @@ using Twilio;
 using Twilio.Types;
 using Twilio.Rest.Api.V2010.Account;
 using System.Net;
+using Twilio.TwiML;
 
 namespace AddressBook.Controllers
 {
@@ -48,7 +49,7 @@ namespace AddressBook.Controllers
             }
             else
             {
-               // ModelState.AddModelError("", "Error in saving data");
+                // ModelState.AddModelError("", "Error in saving data");
                 return View(new AddressBookModel());
             }
         }
@@ -153,15 +154,53 @@ namespace AddressBook.Controllers
                                                 | SecurityProtocolType.Tls12
                                                 | SecurityProtocolType.Ssl3;
 
-            var call = CallResource.Create(to, from,
-                url: new Uri("http://demo.twilio.com/docs/voice.xml"));
+
+            var gatherStr = $"<Gather input='speech dtmf' action='/AddressBook/Gather' finishOnKey='1' numDigits='1' timeout='5' length='5'><Say>Please press 1 to confirm you have understood the message</Say></Gather>";//<Say>We didn't receive any input. Goodbye!</Say>";
+
+            var call = CallResource.Create(
+            twiml: new Twilio.Types.Twiml($"<Response><Say>{model.Message}</Say>{gatherStr}<Pause length='3'/>{gatherStr}</Response>"),
+            //twiml: new Twilio.Types.Twiml($"<Response><Say>{model.Message}</Say>{gatherStr}<Pause length='5'/>{gatherStr}</Response>"),
+            to: new Twilio.Types.PhoneNumber(model.MobileNumber),
+            from: new Twilio.Types.PhoneNumber(fromNumber)
+        );
+
+
 
             Console.WriteLine(call.Sid);
 
             //DbData objDB = new DbData(); //calling class DBdata  
             //var result = objDB.GetAddressBookDataByID(Id); // get values for editing
+            ViewBag.Message = "Success";
             return View(new AddressBookModel());
 
+        }
+
+        [HttpPost]
+	public ActionResult Gather(string digits)
+        {
+            var response = new VoiceResponse();
+
+            // If the user entered digits, process their request
+            if (!string.IsNullOrEmpty(digits))
+            {
+                switch (digits)
+                {
+                    case "1":
+                        response.Say("<Hangup/>");
+                        break;
+                    default:
+                        response.Say("Sorry, I don't understand that choice.").Pause();
+                        //response.Redirect("/voice");
+                        break;
+                }
+            }
+            else
+            {
+                // If no input was sent, redirect to the /voice route
+              //  response.Redirect("/voice");
+            }
+
+            return View(new AddressBookModel());
         }
 
     }
